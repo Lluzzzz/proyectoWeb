@@ -1,7 +1,7 @@
 # Lista de Integrantes
 
-Castañeta Tarquino Luz Gabriela		8467269
-Huaylliri Nina Sergio Wilder
-Laime Laura Alan Rodrigo
-Mamani Ampuero Lucero Elizabeth     9178063
-Peredo Ticona Edwin Daniel   
+1. Castañeta Tarquino Luz Gabriela		8467269
+2. Huaylliri Nina Sergio Wilder
+3. Laime Laura Alan Rodrigo
+4. Mamani Ampuero Lucero Elizabeth     9178063
+5. Peredo Ticona Edwin Daniel   
