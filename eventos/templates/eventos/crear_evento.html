@@ -9,13 +9,8 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Guardar Evento</button>
     </form>
 
     <p><a href="{% url 'lista_eventos' %}">Volver a la lista de eventos</a></p>
 
-<<<<<<< HEAD
 {% endblock %}
-=======
-    {% endblock %}
->>>>>>> 3afafe8a2b04634630bf13c99eb55381c9cb3db6
