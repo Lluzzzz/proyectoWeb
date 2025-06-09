@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Eventos</title>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Eventos</h1>
+        <nav>
+        <ul>
+            <li><a href="{% url 'inicio' %}">Inicio</a></li>
+        </ul>
+        <ul>
+            <li><a href="{% url 'lista_eventos' %}">Lista de Eventos</a></li>
+            <li><a href="{% url 'crear_evento' %}">Crear Evento</a></li>
+        </ul>
+    </nav>
+    </header>
+    <main>
+        {% for evento in eventos %}
+    <h2>{{ evento.titulo }}</h2>
+    <p>{{ evento.descripcion }}</p>
+    <p>Fecha: {{ evento.fecha }} - Hora: {{ evento.hora }}</p>
+    
+    <a href="{% url 'detalle_evento' evento.id %}">Ver detalles</a> |
+    <a href="{% url 'registro_asistente' evento.id %}">Registrarse</a>
+{% endfor %}
+
+        {% block content %}
+
+        {% endblock%}
+    </main>
+
+</body>
+</html>

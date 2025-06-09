@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+
+{% block title %}Lista de Eventos{% endblock %}
+
+{% block content %}
+
+<h1>Eventos disponibles</h1>
+<ul>
+    {% for evento in eventos %}
+    <li>
+        <a href="{% url 'detalle_evento' evento.id %}">{{ evento.titulo }}</a> -
+        {{ evento.fecha }} {{ evento.hora }}  
+        en {{ evento.lugar.nombre }}
+    </li>
+    {% empty %}
+    <li>No hay eventos próximos.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends './base.html' %}
+
+{% block title %}Detalles del Evento{% endblock %}
+
+{% block content %}
+
+<h2>{{ evento.titulo }}</h2>
+<p>{{ evento.descripcion }}</p>
+<p>Organizado por: {{ evento.organizador.nombre }}</p>
+<p>Fecha: {{ evento.fecha }} {{ evento.hora }}</p>
+<p>Lugar: {{ evento.lugar.nombre }}</p>
+<a href="{% url 'inscribirse' evento.id %}">Inscribirse</a>
+
+{% endblock %}
+
