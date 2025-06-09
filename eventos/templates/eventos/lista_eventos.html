@@ -4,6 +4,16 @@
 
 {% block content %}
 
+<<<<<<< HEAD
+{% for evento in eventos %}
+    <h2>{{ evento.titulo }}</h2>
+    <p>{{ evento.descripcion }}</p>
+    <p>Fecha: {{ evento.fecha }} - Hora: {{ evento.hora }}</p>
+    
+    <a href="{% url 'detalle_evento' evento.id %}">Ver detalles</a> |
+    <a href="{% url 'ver_asistentes' evento.id %}">Registrarse</a>
+{% endfor %}
+=======
 <h1>Eventos disponibles</h1>
 <ul>
     {% for evento in eventos %}
@@ -16,6 +26,7 @@
     <li>No hay eventos próximos</li>
     {% endfor %}
 </ul>
+>>>>>>> 3afafe8a2b04634630bf13c99eb55381c9cb3db6
 
 {% endblock %}
 

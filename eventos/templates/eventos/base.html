@@ -7,29 +7,6 @@
 </head>
 <body>
     <header>
-        <h1>Sistema de Eventos Locales y Otros...</h1>
-        <h1 style="color: #007bff; font-size: 2.5rem; text-shadow: 1px 1px 2px gray;">GRUPO 11</h1>
-        <h1>--------</h1>
-        <nav>
-        <ul>
-            <li><a href="{% url 'inicio' %}">Inicio</a></li>
-        </ul>
-        <ul>
-            <li><a href="{% url 'lista_eventos' %}">Lista de Eventos</a></li>
-            <li><a href="{% url 'crear_evento' %}">Crear Evento</a></li>
-        </ul>
-    </nav>
-    </header>
-    <main>
-        {% for evento in eventos %}
-    <h2>{{ evento.titulo }}</h2>
-    <p>{{ evento.descripcion }}</p>
-    <p>Fecha: {{ evento.fecha }} - Hora: {{ evento.hora }}</p>
-    
-    <a href="{% url 'detalle_evento' evento.id %}">Ver detalles del evento</a> |
-    <a href="{% url 'registro_asistente' evento.id %}">Registrarse</a>
-{% endfor %}
-
         {% block content %}
 
         {% endblock%}
