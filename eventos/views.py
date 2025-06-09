@@ -1,7 +1,8 @@
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Evento, Inscripcion, Lugar
-from .forms import InscripcionForm
+from .forms import InscripcionForm, EventoForm
 
 # -------------------------------
 # Página de Inicio
@@ -18,35 +19,20 @@ def lista_eventos(request):
     eventos = Evento.objects.filter(fecha__gte=timezone.now().date()).order_by('fecha')
     return render(request, 'eventos/lista_eventos.html', {'eventos': eventos})
 
-
 # -------------------------------
 # Crear Evento
 # -------------------------------
+
 def crear_evento(request):
     if request.method == 'POST':
-        titulo = request.POST.get('titulo')
-        descripcion = request.POST.get('descripcion')
-        fecha = request.POST.get('fecha')
-        hora = request.POST.get('hora')
-        lugar_id = request.POST.get('lugar')
-
-        if titulo and descripcion and fecha and hora and lugar_id:
-            lugar = Lugar.objects.get(id=lugar_id)
-            Evento.objects.create(
-                titulo=titulo,
-                descripcion=descripcion,
-                fecha=fecha,
-                hora=hora,
-                lugar=lugar
-            )
+        form = EventoForm(request.POST)
+        if form.is_valid():
+            form.save()
             return redirect('lista_eventos')
-        else:
-            error = "Todos los campos son obligatorios."
-            lugares = Lugar.objects.all()
-            return render(request, 'eventos/crear_evento.html', {'error': error, 'lugares': lugares})
-
-    lugares = Lugar.objects.all()
-    return render(request, 'eventos/crear_evento.html', {'lugares': lugares})
+    else:
+        form = EventoForm()
+    
+    return render(request, 'eventos/crear_evento.html', {'form': form})
 
 # -------------------------------
 # Registrar Asistente a Evento
@@ -116,4 +102,14 @@ def registrar_asistencia(request, evento_id, inscripcion_id):
         'mensaje': mensaje,
         'evento': inscripcion.evento,
         'inscripcion': inscripcion
+    })
+
+
+def ver_asistentes(request, evento_id):
+    evento = get_object_or_404(Evento, pk=evento_id)
+    asistentes = Inscripcion.objects.filter(evento=evento)
+    
+    return render(request, 'eventos/lista-asistentes.html', {
+        'evento': evento,
+        'asistentes': asistentes
     })

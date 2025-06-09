@@ -19,15 +19,6 @@
     </nav>
     </header>
     <main>
-        {% for evento in eventos %}
-    <h2>{{ evento.titulo }}</h2>
-    <p>{{ evento.descripcion }}</p>
-    <p>Fecha: {{ evento.fecha }} - Hora: {{ evento.hora }}</p>
-    
-    <a href="{% url 'detalle_evento' evento.id %}">Ver detalles</a> |
-    <a href="{% url 'registro_asistente' evento.id %}">Registrarse</a>
-{% endfor %}
-
         {% block content %}
 
         {% endblock%}

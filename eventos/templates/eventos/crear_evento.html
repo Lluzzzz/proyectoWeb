@@ -8,29 +8,10 @@
 
     <form method="post">
         {% csrf_token %}
-        
-        <label for="titulo">Título:</label><br>
-        <input type="text" id="titulo" name="titulo" required><br><br>
-
-        <label for="descripcion">Descripción:</label><br>
-        <textarea id="descripcion" name="descripcion" rows="4" required></textarea><br><br>
-
-        <label for="fecha">Fecha:</label><br>
-        <input type="date" id="fecha" name="fecha" required><br><br>
-
-        <label for="hora">Hora:</label><br>
-        <input type="time" id="hora" name="hora" required><br><br>
-
-        <label for="lugar">Lugar:</label><br>
-<select name="lugar" id="lugar" required>
-    {% for lugar in lugares %}
-        <option value="{{ lugar.id }}">{{ lugar.nombre }}</option>
-    {% endfor %}
-</select><br><br>
-
+        {{ form.as_p }}
         <button type="submit">Guardar Evento</button>
     </form>
 
     <p><a href="{% url 'lista_eventos' %}">Volver a la lista de eventos</a></p>
 
-    {% endblock %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends './base.html'%}
+
+{% block title %}Lista de Asistentes{% endblock %}
+
+{% block content %}
+
+<h2>Asistentes al evento: {{ evento.titulo }}</h2>
+    <p><strong>Fecha:</strong> {{ evento.fecha }} - <strong>Hora:</strong> {{ evento.hora }}</p>
+
+    {% if asistentes %}
+        <ul>
+            {% for inscripcion in asistentes %}
+                <li>
+                    {{ inscripcion.nombre_participante }} ({{ inscripcion.email }})
+                    {% if inscripcion.asistio %}
+                        ✅ Asistió
+                    {% else %}
+                        ❌ No asistió
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay asistentes registrados.</p>
+    {% endif %}
+
+{% endblock %}
