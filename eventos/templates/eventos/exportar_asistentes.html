@@ -1,0 +1,15 @@
+{% extends "./base.html" %}
+{% block title %}Exportar Asistentes{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+  <h2>Exportar lista de asistentes para el evento:</h2>
+  <h4 class="mb-3">{{ evento.titulo }}</h4>
+
+  <p>Este proceso descargará un archivo CSV con los asistentes registrados.</p>
+
+  <a href="{% url 'exportar_asistentes' evento.id %}" class="btn btn-success mt-3">Descargar CSV</a>
+  <br><br>
+  <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-outline-light">Volver al evento</a>
+</div>
+{% endblock %}
