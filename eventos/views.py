@@ -1,8 +1,16 @@
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Evento, Inscripcion, Lugar
 from .forms import InscripcionForm, EventoForm
+from django.contrib import messages
+from django.http import HttpResponse
+import csv
+from django.shortcuts import get_object_or_404
+from .models import Evento, Inscripcion
+from django.http import FileResponse
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 # -------------------------------
 # Página de Inicio
@@ -19,10 +27,10 @@ def lista_eventos(request):
     eventos = Evento.objects.filter(fecha__gte=timezone.now().date()).order_by('fecha')
     return render(request, 'eventos/lista_eventos.html', {'eventos': eventos})
 
+
 # -------------------------------
 # Crear Evento
 # -------------------------------
-
 def crear_evento(request):
     if request.method == 'POST':
         form = EventoForm(request.POST)
@@ -33,6 +41,7 @@ def crear_evento(request):
         form = EventoForm()
     
     return render(request, 'eventos/crear_evento.html', {'form': form})
+
 
 # -------------------------------
 # Registrar Asistente a Evento
@@ -105,6 +114,9 @@ def registrar_asistencia(request, evento_id, inscripcion_id):
     })
 
 
+# -------------------------------
+# Ver Asistentes
+# -------------------------------
 def ver_asistentes(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     asistentes = Inscripcion.objects.filter(evento=evento)
@@ -115,19 +127,98 @@ def ver_asistentes(request, evento_id):
     })
 
 
-
-def index(request):
+# -------------------------------
+# Eliminar Evento
+# -------------------------------
+def eliminar_evento(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
     if request.method == 'POST':
-        usuario = request.POST['username']
-        clave = request.POST['password']
-        user = authenticate(request, username=usuario, password=clave)
-        if user is not None:
-            login(request, user)
-            return redirect('lista_eventos') 
-        else:
-            return render(request, 'eventos/inicio.html', {'error': 'Usuario o contraseña incorrectos'})
-    return render(request, 'eventos/inicio.html')
+        evento.delete()
+        messages.success(request, "Evento eliminado correctamente.")
+        return redirect('lista_eventos')
+    return render(request, 'eventos/confirmar_eliminar.html', {'evento': evento})
 
-def cerrar_sesion(request):
-    logout(request)
-    return redirect('inicio')
+
+# -------------------------------
+# Editar Evento
+# -------------------------------
+def editar_evento(request, evento_id):
+    evento = get_object_or_404(Evento, pk=evento_id)
+    
+    if request.method == 'POST':
+        form = EventoForm(request.POST, instance=evento)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Evento actualizado correctamente.")
+            return redirect('detalle_evento', evento_id=evento.id)
+    else:
+        form = EventoForm(instance=evento)
+    
+    return render(request, 'eventos/editar_evento.html', {'form': form, 'evento': evento})
+
+
+# -------------------------------
+# BUSCAR EVENTOS
+# -------------------------------
+def buscar_eventos(request):
+    query = request.GET.get('q', '')
+    resultados = Evento.objects.filter(titulo__icontains=query)
+    return render(request, 'eventos/buscar_eventos.html', {
+        'eventos': resultados,
+        'query': query
+    })
+
+
+# -------------------------------
+# EXPORTAR ASISTENTES A CSV
+# -------------------------------
+def exportar_asistentes_csv(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+    asistentes = Inscripcion.objects.filter(evento=evento)
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename="asistentes_{evento.titulo}.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Nombre', 'Email', 'Asistió'])
+
+    for a in asistentes:
+        writer.writerow([
+            a.nombre_participante,
+            a.email,  
+            'Sí' if a.asistio else 'No'
+        ])
+
+    return response
+
+# -------------------------------
+# EXPORTAR ASISTENTES A PDF
+# -------------------------------
+
+def exportar_asistentes_pdf(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+    asistentes = Inscripcion.objects.filter(evento=evento)
+
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=letter)
+    p.setTitle(f"Asistentes - {evento.titulo}")
+
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(50, 750, f"Asistentes al evento: {evento.titulo}")
+    p.setFont("Helvetica", 12)
+    p.drawString(50, 730, f"Fecha: {evento.fecha}  -  Hora: {evento.hora}")
+
+    y = 700
+    for a in asistentes:
+        estado = "✅ Asistió" if a.asistio else "❌ No asistió"
+        p.drawString(50, y, f"- {a.nombre_participante} ({a.email}) — {estado}")
+        y -= 20
+        if y < 60:
+            p.showPage()
+            y = 750
+
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+
+    return FileResponse(buffer, as_attachment=True, filename=f"asistentes_{evento.titulo}.pdf")
