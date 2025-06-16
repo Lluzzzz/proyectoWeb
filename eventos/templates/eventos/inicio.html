@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión - Plataforma de Eventos</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Plataforma de Eventos</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                {% if user.is_authenticated %}
+                    <li><span>👤 {{ user.username }}</span></li>
+                    <li><a href="{% url 'cerrar_sesion' %}">Cerrar sesión</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% if user.is_authenticated %}
+            <section class="destacado">
+                <h2>¡Bienvenido de nuevo, {{ user.username }}!</h2>
+                <p>Usa la barra de navegación para explorar y gestionar eventos.</p>
+            </section>
+        {% else %}
+            <section class="destacado">
+                <h2>Iniciar Sesión</h2>
+                <p>Accede para ver y gestionar eventos.</p>
+            </section>
+
+            {% if error %}
+                <ul class="messages">
+                    <li>{{ error }}</li>
+                </ul>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <p>
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required>
+                </p>
+                <p>
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </p>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        {% endif %}
+    </main>
+</body>
+</html>
