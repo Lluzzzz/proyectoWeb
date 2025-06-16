@@ -1,0 +1,22 @@
+{% extends './base.html' %}
+{% block title %}Eventos Pasados{% endblock %}
+
+{% block content %}
+<div class="evento-card">
+  <h2>📚 Historial de Eventos</h2>
+
+  {% if eventos %}
+    {% for evento in eventos %}
+      <div class="evento-card">
+        <h3>{{ evento.titulo }}</h3>
+        <p>{{ evento.descripcion }}</p>
+        <p><strong>📅 Fecha:</strong> {{ evento.fecha }} - <strong>🕒 Hora:</strong> {{ evento.hora }}</p>
+        <p><strong>📍 Lugar:</strong> {{ evento.lugar.nombre }}</p>
+        <a href="{% url 'detalle_evento' evento.id %}" class="button-link">Ver Detalles</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No hay eventos pasados registrados.</p>
+  {% endif %}
+</div>
+{% endblock %}
