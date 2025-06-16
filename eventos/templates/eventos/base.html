@@ -1,16 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+    <meta property="og:title" content="{% block og_title %}Sistema de Eventos Locales{% endblock %}"/>
+    <meta property="og:description" content="{% block og_description %}Descubre y crea eventos locales.{% endblock %}"/>
+    <meta property="og:image" content="{% static 'eventos/og-default.png' %}"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="website"/>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Eventos Locales y Otros...</title>
+    <title>Sistema de Eventos Locales y Otros</title>
+    <link rel="stylesheet" href="{% static 'eventos/style.css' %}">
 </head>
 <body>
     <header>
+        <img src="https://img.freepik.com/vector-premium/coleccion-logotipos-letras-alfabeticas_647881-448.jpg?semt=ais_hybrid&w=740" alt="Logo del sitio" height="60">
+        <h1>Sistema de Eventos Locales y Otros</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="{% url 'lista_eventos' %}">Lista de Eventos</a></li>
+                <li><a href="{% url 'crear_evento' %}">Crear Evento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="destacado">
+            <h2>🎉 ¡Próximo Gran Evento!</h2>
+            <p>No te pierdas nuestro evento más importante del mes. Música, cultura y comunidad.</p>
+        </section>
+
         {% block content %}
-
-        {% endblock%}
+        {% endblock %}
     </main>
-
 </body>
 </html>
+
