@@ -113,3 +113,21 @@ def ver_asistentes(request, evento_id):
         'evento': evento,
         'asistentes': asistentes
     })
+
+
+
+def index(request):
+    if request.method == 'POST':
+        usuario = request.POST['username']
+        clave = request.POST['password']
+        user = authenticate(request, username=usuario, password=clave)
+        if user is not None:
+            login(request, user)
+            return redirect('lista_eventos') 
+        else:
+            return render(request, 'eventos/inicio.html', {'error': 'Usuario o contraseña incorrectos'})
+    return render(request, 'eventos/inicio.html')
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('inicio')
