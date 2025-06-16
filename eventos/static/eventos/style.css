@@ -14,7 +14,7 @@ body {
 
 /* ======== HEADER ======== */
 header {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(10, 116, 218, 0.4);
     backdrop-filter: blur(10px);
     padding: 20px;
     display: flex;
@@ -279,10 +279,9 @@ input, select, textarea {
 
 
 footer {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(7, 7, 7, 0.959);
     backdrop-filter: blur(10px);
     padding: 20px;
     text-align: center;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: black;
 }
