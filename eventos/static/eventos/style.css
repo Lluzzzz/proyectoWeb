@@ -1,0 +1,268 @@
+/* ======== ESTILO GLOBAL ======== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-image: url('https://grandluxormice.com/es/wp-content/uploads/sites/3/2022/07/Evento-corporativo-e1661944165280-1900x1069.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+/* ======== HEADER ======== */
+header {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 24px;
+    color: #fff;
+    margin: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #aad4ff;
+}
+
+/* ======== MAIN Y SECCIONES ======== */
+main {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    margin: 20px;
+}
+
+/* Sección destacada */
+.destacado {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.destacado h2 {
+    margin-top: 0;
+}
+
+.destacado p {
+    color: #eee;
+}
+
+/* ======== BOTONES ======== */
+button, .button-link {
+    background: #0a74da;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+button:hover, .button-link:hover {
+    background: #004a99;
+}
+
+/* ======== FORMULARIOS ======== */
+form {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 40px;
+    color: #000;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* ======== MENSAJES ======== */
+.messages {
+    list-style: none;
+    padding: 10px;
+    background-color: #e0f7fa;
+    border-left: 4px solid #00acc1;
+    margin-bottom: 20px;
+    color: #004d40;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+.evento-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 750px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.evento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.evento-card h3 {
+    margin-top: 0;
+    color: #0a74da;
+}
+
+.evento-card p {
+    margin: 8px 0;
+}
+.button-link {
+    background: #0a74da;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 10px 0 0;
+}
+
+.button-link:hover {
+    background: #004a99;
+}
+
+.asistentes-lista {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.asistentes-lista li {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.asistio {
+    color: green;
+    font-weight: bold;
+}
+
+.no-asistio {
+    color: red;
+    font-weight: bold;
+}
+.share-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Facebook */
+.share-btn.fb {
+    background-color: #4267B2;
+}
+.share-btn.fb:hover {
+    background-color: #365899;
+}
+
+/* Twitter */
+.share-btn.tw {
+    background-color: #1DA1F2;
+}
+.share-btn.tw:hover {
+    background-color: #0d8ddb;
+}
+
+/* WhatsApp */
+.share-btn.wa {
+    background-color: #25D366;
+}
+.share-btn.wa:hover {
+    background-color: #1ebe5a;
+}
+
+/* Efecto hover genérico */
+.share-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
