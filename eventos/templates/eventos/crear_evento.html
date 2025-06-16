@@ -1,16 +1,16 @@
-{% extends "./base.html" %}
+{% extends "./base.html" %} 
 
 {% block title %}Crear Nuevo Evento{% endblock %}
 
 {% block content %}
-
-<h1>Crea Nuevo Evento</h1>
+<div class="evento-card">
+    <h2>🗓️ Crear Nuevo Evento</h2>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        <button type="submit">💾 Guardar Evento</button>
+        <a class="button-link" href="{% url 'lista_eventos' %}">🔙 Volver a la lista</a>
     </form>
-
-    <p><a href="{% url 'lista_eventos' %}">Volver a la lista de eventos</a></p>
-
+</div>
 {% endblock %}
