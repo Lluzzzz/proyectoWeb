@@ -15,11 +15,22 @@ from reportlab.lib.pagesizes import letter
 # -------------------------------
 # Página de Inicio
 # -------------------------------
+
 def index(request):
-    eventos = Evento.objects.filter(fecha__gte=timezone.now().date()).order_by('fecha')
-    return render(request, 'eventos/base.html', {'eventos': eventos})
-
-
+    if request.method == 'POST':
+        usuario = request.POST['username']
+        clave = request.POST['password']
+        user = authenticate(request, username=usuario, password=clave)
+        if user is not None:
+            login(request, user)
+            return redirect('lista_eventos') 
+        else:
+            return render(request, 'eventos/inicio.html', {'error': 'Usuario o contraseña incorrectos'})
+    return render(request, 'eventos/inicio.html')
+#__________________-------------
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('inicio')
 # -------------------------------
 # Lista de Eventos
 # -------------------------------
