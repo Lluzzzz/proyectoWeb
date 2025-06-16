@@ -1,14 +1,15 @@
-{% extends "./base.html" %}
+{% extends "./base.html" %} 
 
 {% block title %}Inscribirse en {{ evento.titulo }}{% endblock %}
 
 {% block content %}
+<div class="evento-card">
+    <h2>📝 Inscribirse en: <em>{{ evento.titulo }}</em></h2>
 
-<h2>Inscribirse en {{ evento.titulo }}</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar</button>
-</form>
-<p><a href="{% url 'lista_eventos' %}">← Volver a la lista de eventos</a></p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">✅ Enviar Inscripción</button>
+    </form>
+</div>
 {% endblock %}
