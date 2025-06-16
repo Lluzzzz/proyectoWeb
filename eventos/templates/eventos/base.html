@@ -13,11 +13,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Eventos Locales y Otros</title>
     <link rel="stylesheet" href="{% static 'eventos/style.css' %}">
+    <link rel="stylesheet" href="{% static 'eventos/forms.style.css' %}">
 </head>
 <body>
     <header>
-        <img src="https://img.freepik.com/vector-premium/coleccion-logotipos-letras-alfabeticas_647881-448.jpg?semt=ais_hybrid&w=740" alt="Logo del sitio" height="60">
-        <h1>Sistema de Eventos Locales y Otros</h1>
+        <div>
+            <img src="https://img.freepik.com/vector-premium/coleccion-logotipos-letras-alfabeticas_647881-448.jpg?semt=ais_hybrid&w=740" alt="Logo del sitio" height="60">
+            <h1>Sistema de Eventos Locales</h1>
+        </div>
         <nav>
             <ul>
                 <li><a href="{% url 'inicio' %}">Inicio</a></li>
@@ -39,6 +42,12 @@
         {% block content %}
         {% endblock %}
     </main>
+    <footer>
+        <p>&copy; 2023 Sistema de Eventos Locales. Todos los derechos reservados.</p>
+        <p>Desarrollado por: <a href="" target="_blank">binary brains</a></p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'eventos/main.js' %}"></script>
 </body>
 </html>
 

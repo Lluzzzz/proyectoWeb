@@ -26,7 +26,7 @@ def index(request):
         user = authenticate(request, username=usuario, password=clave)
         if user is not None:
             login(request, user)
-            return redirect('lista_eventos') 
+            return redirect('inicio') 
         else:
             return render(request, 'eventos/inicio.html', {'error': 'Usuario o contraseña incorrectos'})
     return render(request, 'eventos/inicio.html')
@@ -182,6 +182,15 @@ def buscar_eventos(request):
         'query': query
     })
 
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+
+def buscar(request):
+    q = request.GET.get('q', '')
+    eventos = Evento.objects.filter(titulo__icontains=q, fecha__gte=timezone.now().date()).order_by('fecha')
+    
+    html = render_to_string('eventos/listado_eventos.html', {'eventos': eventos})
+    return JsonResponse({'html': html})
 
 # -------------------------------
 # EXPORTAR ASISTENTES A CSV

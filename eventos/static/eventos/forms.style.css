@@ -1,0 +1,11 @@
+.login-form{
+    all: unset;
+}
+
+.login-form input{
+    all: unset;
+    background-color: wheat;
+    padding: 10px;
+    width: 100%;
+    color: black;
+}

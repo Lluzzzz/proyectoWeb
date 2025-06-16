@@ -24,6 +24,16 @@ header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+header div img{
+    border-radius: 100%;
+}
+
+header div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 header h1 {
     font-size: 24px;
     color: #fff;
@@ -104,27 +114,27 @@ button:hover, .button-link:hover {
 
 /* ======== FORMULARIOS ======== */
 form {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
+    all: unset;
     padding: 35px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     width: 100%;
     max-width: 600px;
     margin-bottom: 40px;
-    color: #000;
+    color: #f8f7f7;
 }
 
-form p {
+form label {
     margin-bottom: 15px;
+    width: 100px;
 }
 
 input, select, textarea {
-    width: 100%;
+    all: unset;
+    width: 90%;
     padding: 8px 12px;
     margin-top: 5px;
     border: 1px solid #ccc;
-    border-radius: 8px;
     font-size: 14px;
 }
 
@@ -153,7 +163,7 @@ input, select, textarea {
     }
 }
 .evento-card {
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(37, 36, 36, 0.65);
     backdrop-filter: blur(12px);
     border-radius: 16px;
     padding: 20px;
@@ -265,4 +275,14 @@ input, select, textarea {
 .share-btn:hover {
     transform: translateY(-2px);
     opacity: 0.9;
+}
+
+
+footer {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: black;
 }
