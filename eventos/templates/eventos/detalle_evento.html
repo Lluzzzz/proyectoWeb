@@ -1,15 +1,45 @@
 {% extends './base.html' %}
+{% load static %}
+
+{# Metadatos Open Graph para compartir en redes sociales #}
+{% block og_title %}{{ evento.titulo }}{% endblock %}
+{% block og_description %}{{ evento.descripcion|truncatechars:100 }}{% endblock %}
+{% block og_image %}
+    {% if evento.qr_code %}
+        {{ evento.qr_code.url }}
+    {% else %}
+        {% static 'eventos/og-default.png' %}
+    {% endif %}
+{% endblock %}
 
 {% block title %}Detalles del Evento{% endblock %}
 
 {% block content %}
+<div class="evento-card">
+    <h2>{{ evento.titulo }}</h2>
+    <p>{{ evento.descripcion }}</p>
+    <p><strong>Organizado por:</strong> {{ evento.organizador.nombre }}</p>
+    <p><strong>Fecha:</strong> {{ evento.fecha }} {{ evento.hora }}</p>
+    <p><strong>Lugar:</strong> {{ evento.lugar.nombre }}</p>
 
-<h2>{{ evento.titulo }}</h2>
-<p>{{ evento.descripcion }}</p>
-<p>Organizado por: {{ evento.organizador.nombre }}</p>
-<p>Fecha: {{ evento.fecha }} {{ evento.hora }}</p>
-<p>Lugar: {{ evento.lugar.nombre }}</p>
-<a href="{% url 'inscribirse' evento.id %}">Inscribirse</a>
+    <div style="margin-top: 20px;">
+        <a class="button-link" href="{% url 'inscribirse' evento.id %}">📝 Inscribirse</a>
+        <a class="button-link" href="{% url 'editar_evento' evento.id %}">✏️ Editar Evento</a>
+        <a class="button-link" style="background-color: #dc3545;" href="{% url 'eliminar_evento' evento.id %}">🗑️ Eliminar</a>
+    </div>
 
+    <!-- Botones de compartir -->
+    <div class="share-buttons">
+        <a class="share-btn fb"   href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+        📘 Facebook
+        </a>
+        <a class="share-btn tw"   href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ evento.titulo|urlencode }}" target="_blank">
+        🐦 Twitter
+        </a>
+        <a class="share-btn wa"   href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}" target="_blank">
+        📱 WhatsApp
+        </a>
+    </div>
+
+</div>
 {% endblock %}
-
