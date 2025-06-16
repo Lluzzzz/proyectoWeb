@@ -5,6 +5,7 @@ from .forms import InscripcionForm, EventoForm
 from django.contrib import messages
 from django.http import HttpResponse
 import csv
+from datetime import date
 from django.shortcuts import get_object_or_404
 from .models import Evento, Inscripcion
 from django.http import FileResponse
@@ -233,3 +234,11 @@ def exportar_asistentes_pdf(request, evento_id):
     buffer.seek(0)
 
     return FileResponse(buffer, as_attachment=True, filename=f"asistentes_{evento.titulo}.pdf")
+
+
+    # -------------------------------
+    #  VER EVENTOS PASADOS
+    # -------------------------------
+    def eventos_pasados(request):
+    eventos = Evento.objects.filter(fecha__lt=date.today()).order_by('-fecha')
+    return render(request, 'eventos/eventos_pasados.html', {'eventos': eventos})
