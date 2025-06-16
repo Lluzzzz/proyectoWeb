@@ -4,4 +4,4 @@
 2. Huaylliri Nina Sergio Wilder
 3. Laime Laura Alan Rodrigo          13298285
 4. Mamani Ampuero Lucero Elizabeth     9178063
-5. Peredo Ticona Edwin Daniel   
+5. Peredo Ticona Edwin Daniel   14007020
