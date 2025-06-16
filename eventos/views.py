@@ -12,6 +12,8 @@ from django.http import FileResponse
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout 
 
 # -------------------------------
 # Página de Inicio
@@ -239,6 +241,6 @@ def exportar_asistentes_pdf(request, evento_id):
     # -------------------------------
     #  VER EVENTOS PASADOS
     # -------------------------------
-    def eventos_pasados(request):
+def eventos_pasados(request):
     eventos = Evento.objects.filter(fecha__lt=date.today()).order_by('-fecha')
     return render(request, 'eventos/eventos_pasados.html', {'eventos': eventos})
