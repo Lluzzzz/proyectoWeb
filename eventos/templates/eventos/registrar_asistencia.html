@@ -1,28 +1,19 @@
-{% extends './base.html'%}
+{% extends './base.html' %}
 
-{% block title %}Lista de Asistentes{% endblock %}
+{% block title %}Registrar Asistencia{% endblock %}
 
 {% block content %}
-<div class="evento-card">
-    <h2>👥 Asistentes al Evento: <em>{{ evento.titulo }}</em></h2>
-    <p><strong>📅 Fecha:</strong> {{ evento.fecha }} - <strong>🕒 Hora:</strong> {{ evento.hora }}</p>
 
-    {% if asistentes %}
-        <ul class="asistentes-lista">
-            {% for inscripcion in asistentes %}
-                <li>
-                    <strong>{{ inscripcion.nombre_participante }}</strong> ({{ inscripcion.email }}) — 
-                    {% if inscripcion.asistio %}
-                        <span class="asistio">✅ Asistió</span>
-                    {% else %}
-                        <span class="no-asistio">❌ No asistió</span>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay asistentes registrados.</p>
-    {% endif %}
-</div>
+<h2>Registro de Asistencia</h2>
+
+<p>{{ mensaje }}</p>
+
+<h3>Evento: {{ evento.titulo }}</h3>
+<p>Participante: {{ inscripcion.nombre_participante }}</p>
+<p>Email: {{ inscripcion.email }}</p>
+<p>Fecha: {{ evento.fecha }} {{ evento.hora }}</p>
+<p>Lugar: {{ evento.lugar.nombre }}</p>
+
+<a href="{% url 'lista_eventos' %}">← Volver al listado de eventos</a>
+
 {% endblock %}
-
