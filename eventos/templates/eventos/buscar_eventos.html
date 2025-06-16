@@ -1,0 +1,30 @@
+{% extends "./base.html" %}
+{% block title %}Buscar Eventos{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">Buscar eventos</h2>
+  <form method="get" class="mb-4">
+    <input type="text" name="q" class="form-control" placeholder="Buscar por título..." value="{{ query }}">
+  </form>
+
+  {% if eventos %}
+    <div class="row">
+      {% for evento in eventos %}
+        <div class="col-md-4 mb-4">
+          <div class="card bg-dark text-white h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ evento.titulo }}</h5>
+              <p class="card-text">{{ evento.descripcion|truncatewords:20 }}</p>
+              <p class="card-text"><small>{{ evento.fecha }} {{ evento.hora }}</small></p>
+              <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-outline-info btn-sm mt-2">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No se encontraron eventos con ese nombre.</p>
+  {% endif %}
+</div>
+{% endblock %}
