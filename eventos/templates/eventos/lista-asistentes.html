@@ -6,7 +6,10 @@
 
 <h2>Asistentes al evento: {{ evento.titulo }}</h2>
     <p><strong>Fecha:</strong> {{ evento.fecha }} - <strong>Hora:</strong> {{ evento.hora }}</p>
-
+    <div style="margin: 15px 0;">
+        <a href="{% url 'exportar_asistentes' evento.id %}" class="button-link">📄 Exportar CSV</a>
+        <a href="{% url 'exportar_asistentes_pdf' evento.id %}" class="button-link">🖨️ Exportar PDF</a>
+    </div>
     {% if asistentes %}
         <ul>
             {% for inscripcion in asistentes %}
