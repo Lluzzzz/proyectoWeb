@@ -26,7 +26,7 @@ class Evento(models.Model):
         return self.titulo
 
 class Inscripcion(models.Model):
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, related_name='inscripciones')
     nombre_participante = models.CharField(max_length=100)
     email = models.EmailField()
     asistio = models.BooleanField(default=False)
