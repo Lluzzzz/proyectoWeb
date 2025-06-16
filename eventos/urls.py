@@ -14,4 +14,6 @@ urlpatterns = [
     path('eventos/buscar/', views.buscar_eventos, name='buscar_eventos'),
     path('eventos/<int:evento_id>/exportar-asistentes/', views.exportar_asistentes_csv, name='exportar_asistentes'),
     path('eventos/<int:evento_id>/exportar-asistentes/pdf/', views.exportar_asistentes_pdf, name='exportar_asistentes_pdf'),
+    path('eventos/pasados/', views.eventos_pasados, name='eventos_pasados'),
+
 ]
