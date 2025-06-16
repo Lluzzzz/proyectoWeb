@@ -24,8 +24,10 @@
 
     <div style="margin-top: 20px;">
         <a class="button-link" href="{% url 'inscribirse' evento.id %}">📝 Inscribirse</a>
-        <a class="button-link" href="{% url 'editar_evento' evento.id %}">✏️ Editar Evento</a>
-        <a class="button-link" style="background-color: #dc3545;" href="{% url 'eliminar_evento' evento.id %}">🗑️ Eliminar</a>
+        {% if user.is_authenticated %}
+            <a class="button-link" href="{% url 'editar_evento' evento.id %}">✏️ Editar Evento</a>
+            <a class="button-link" style="background-color: #dc3545;" href="{% url 'eliminar_evento' evento.id %}">🗑️ Eliminar</a>
+        {% endif %}
     </div>
 
     <!-- Botones de compartir -->

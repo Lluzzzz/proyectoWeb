@@ -8,7 +8,7 @@
     {% if user.is_authenticated %}
         <h2>¡Bienvenido de nuevo, {{ user.username }}!</h2>
         <p>Usa la barra de navegación para explorar y gestionar eventos.</p>
-        <div class="mt-3">
+        <div class="mt-3 button-link">
             <a href="{% url 'cerrar_sesion' %}" class="btn btn-logout">🔒 Cerrar Sesión</a>
         </div>
     {% else %}
