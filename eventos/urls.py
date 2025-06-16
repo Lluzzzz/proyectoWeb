@@ -11,4 +11,7 @@ urlpatterns = [
     path('eventos/<int:evento_id>/registrar/', views.registrar_asistente, name='registro_asistente'),
     path('eventos/<int:evento_id>/inscribirse/', views.inscribirse, name='inscribirse'),
     path('eventos/<int:evento_id>/asistencia/<int:inscripcion_id>/', views.registrar_asistencia, name='registrar_asistencia'),
+    path('eventos/buscar/', views.buscar_eventos, name='buscar_eventos'),
+    path('eventos/<int:evento_id>/exportar-asistentes/', views.exportar_asistentes_csv, name='exportar_asistentes'),
+    path('eventos/<int:evento_id>/exportar-asistentes/pdf/', views.exportar_asistentes_pdf, name='exportar_asistentes_pdf'),
 ]
